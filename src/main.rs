@@ -5,7 +5,6 @@ use std::fs;
 use std::env;
 use reqwest::blocking::Client;
 use serde::Deserialize;
-use std::io::Write;
 
 #[derive(Deserialize)]
 struct Release {
