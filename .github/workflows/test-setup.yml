@@ -1,0 +1,39 @@
+name: Test setup_nu Action
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-setup-nu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl tar gnupg build-essential
+
+      - name: Install Rust
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          source $HOME/.cargo/env
+
+      - name: Build and Test setup_nu
+        run: |
+          cargo build --release
+          ./target/release/setup_nu
+
+      - name: Verify Nushell Installation
+        run: |
+          if ! command -v nu &> /dev/null; then
+            echo "Nushell was not installed correctly"
+            exit 1
+          fi
+          echo "Nushell installation test passed."

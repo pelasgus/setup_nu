@@ -1,0 +1,31 @@
+name: "setup_nu"
+description: "GitHub Action to install Nushell using Rust"
+author: "Your Name"
+inputs:
+  set-default:
+    description: "Set Nushell as the default shell"
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y curl tar gnupg build-essential
+
+    - name: Build setup_nu
+      shell: bash
+      run: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        source $HOME/.cargo/env
+        cargo build --release
+
+    - name: Run setup_nu
+      shell: bash
+      run: |
+        ./target/release/setup_nu ${{ inputs.set-default }}
+branding:
+  icon: "package"
+  color: "purple"
