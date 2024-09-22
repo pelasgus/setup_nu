@@ -40,7 +40,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let target_asset = response.assets.iter().find(|asset| {
         asset.name.contains("linux")
             && asset.name.ends_with(".tar.gz")
-            && !asset.name.contains("musl")
+//            && !asset.name.contains("musl")
     }).expect("Could not find a suitable Nushell asset for Linux.");
 
     println!("Downloading {}", target_asset.name);
