@@ -3,6 +3,11 @@ name = "setup_nu"
 version = "0.1.0"
 edition = "2021"
 
+# Set the entry point for the binary
+[[bin]]
+name = "setup_nu"
+path = "src/main.rs"
+
 [dependencies]
 reqwest = { version = "0.11", features = ["blocking", "json", "rustls-tls"] }
 serde = { version = "1.0", features = ["derive"] }
