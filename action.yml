@@ -1,6 +1,6 @@
 name: "setup_nu"
-description: "GitHub Action to install Nushell using Rust"
-author: "Your Name"
+description: "This GitHub Action will setup a Nushell environment."
+author: "D.A.Pelasgus"
 inputs:
   set-default:
     description: "Set Nushell as the default shell"
